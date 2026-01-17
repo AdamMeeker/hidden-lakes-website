@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hidden Lakes - Premium estate living in Iowa City's prestigious West High School district. 52 exclusive lots on 80 acres with two scenic lakes.">
+    <meta name="keywords" content="Hidden Lakes, Iowa City real estate, West High School district, estate lots, lakefront living, Johnson County">
+    <meta property="og:title" content="Hidden Lakes - Premium Estate Living | Iowa City">
+    <meta property="og:description" content="52 exclusive estate lots on 80 acres with two scenic lakes in Iowa City's West High School district.">
+    <meta property="og:type" content="website">
+    <title>Hidden Lakes | Premium Estate Living in Iowa City</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <span class="logo-text">HIDDEN LAKES</span>
+                <span class="logo-tagline">Iowa City</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#community">The Community</a></li>
+                <li><a href="#lots">Available Lots</a></li>
+                <li><a href="#location">Location</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#developer">About</a></li>
+                <li><a href="#contact" class="nav-cta">Schedule Tour</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-video-container">
+            <!-- Placeholder for drone video - replace src when available -->
+            <div class="hero-video-placeholder" id="heroVideo">
+                <img src="images/hero-placeholder.svg" alt="Hidden Lakes aerial view" class="hero-image">
+            </div>
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="hero-title-top">Discover</span>
+                <span class="hero-title-main">Hidden Lakes</span>
+            </h1>
+            <p class="hero-subtitle">Premium Estate Living in Iowa City's Most Prestigious School District</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-value">52</span>
+                    <span class="hero-stat-label">Estate Lots</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-value">80</span>
+                    <span class="hero-stat-label">Acres</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-value">2</span>
+                    <span class="hero-stat-label">Lakes</span>
+                </div>
+            </div>
+            <div class="hero-cta-group">
+                <a href="#lots" class="btn btn-primary">Explore Available Lots</a>
+                <a href="#contact" class="btn btn-secondary">Schedule Private Tour</a>
+            </div>
+        </div>
+        <a href="#community" class="scroll-indicator" aria-label="Scroll to content">
+            <span class="scroll-arrow"></span>
+        </a>
+    </section>
+
+    <!-- Community Section -->
+    <section class="section community" id="community">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">The Vision</span>
+                <h2 class="section-title">Where Nature Meets Luxury</h2>
+                <p class="section-intro">Hidden Lakes is an exclusive 80-acre residential development offering a rare opportunity to build your dream home on estate-sized lots with breathtaking lake views in Iowa City's most sought-after school district.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24 4L4 14V34L24 44L44 34V14L24 4Z" stroke="currentColor" stroke-width="2"/>
+                            <path d="M24 22L4 14M24 22V44M24 22L44 14" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Estate-Sized Lots</h3>
+                    <p class="feature-text">Generous 0.5 to 5 acre homesites offering privacy, space, and room for your custom dream home with all the amenities you desire.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 36C4 36 12 28 24 28C36 28 44 36 44 36" stroke="currentColor" stroke-width="2"/>
+                            <path d="M8 32C8 32 14 26 24 26C34 26 40 32 40 32" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="24" cy="18" r="6" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Two Scenic Lakes</h3>
+                    <p class="feature-text">Premium waterfront living with two beautiful lakes creating a serene backdrop for your family's new chapter. Select lots offer direct water views.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 40V20L24 8L40 20V40H8Z" stroke="currentColor" stroke-width="2"/>
+                            <path d="M18 40V28H30V40" stroke="currentColor" stroke-width="2"/>
+                            <path d="M4 22L24 6L44 22" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">All Builders Welcome</h3>
+                    <p class="feature-text">Choose your preferred builder and architect to create a truly custom home. No builder restrictions means your vision, your way.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="12" width="32" height="28" rx="2" stroke="currentColor" stroke-width="2"/>
+                            <path d="M16 12V8H32V12" stroke="currentColor" stroke-width="2"/>
+                            <path d="M8 20H40" stroke="currentColor" stroke-width="2"/>
+                            <path d="M20 20V40M28 20V40" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">West High District</h3>
+                    <p class="feature-text">Located in Iowa City's prestigious West High School district, known for academic excellence and comprehensive extracurricular programs.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2"/>
+                            <path d="M24 12V24L32 28" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">City Water Access</h3>
+                    <p class="feature-text">Enjoy the benefits of a county subdivision with the convenience of city water service. Modern infrastructure meets natural beauty.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24 4L28 16H40L30 24L34 36L24 28L14 36L18 24L8 16H20L24 4Z" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Premium Location</h3>
+                    <p class="feature-text">Just 15 minutes to downtown Iowa City and 28 minutes to Coral Ridge Mall. The perfect balance of seclusion and accessibility.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Available Lots Section -->
+    <section class="section lots" id="lots">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Find Your Homesite</span>
+                <h2 class="section-title">Available Lots</h2>
+                <p class="section-intro">Explore our interactive site plan to find your perfect lot. Click on any lot for details including size, pricing, and views.</p>
+            </div>
+
+            <div class="lot-map-container">
+                <div class="lot-map-controls">
+                    <div class="lot-legend">
+                        <div class="legend-item">
+                            <span class="legend-color available"></span>
+                            <span class="legend-label">Available</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color reserved"></span>
+                            <span class="legend-label">Reserved</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color sold"></span>
+                            <span class="legend-label">Sold</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color lake"></span>
+                            <span class="legend-label">Lake</span>
+                        </div>
+                    </div>
+                    <div class="lot-filters">
+                        <select id="lotSizeFilter" class="filter-select">
+                            <option value="all">All Sizes</option>
+                            <option value="small">Under 1 acre</option>
+                            <option value="medium">1-2 acres</option>
+                            <option value="large">2+ acres</option>
+                        </select>
+                        <select id="lotViewFilter" class="filter-select">
+                            <option value="all">All Views</option>
+                            <option value="lake">Lake View</option>
+                            <option value="woods">Wooded</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="lot-map-wrapper">
+                    <div class="lot-map" id="lotMap">
+                        <!-- Interactive SVG lot map will be inserted here by JavaScript -->
+                        <img src="images/site-plan.jpg" alt="Hidden Lakes Site Plan" class="site-plan-image" id="sitePlanImage">
+                        <svg class="lot-overlay" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" id="lotOverlay">
+                            <!-- Lot polygons will be dynamically generated -->
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Lot Detail Panel -->
+                <div class="lot-detail-panel" id="lotDetailPanel">
+                    <button class="panel-close" id="panelClose" aria-label="Close panel">&times;</button>
+                    <div class="lot-detail-content">
+                        <h3 class="lot-detail-title">Lot <span id="lotNumber">--</span></h3>
+                        <div class="lot-detail-status" id="lotStatus">Available</div>
+                        <div class="lot-detail-specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Size</span>
+                                <span class="spec-value" id="lotSize">--</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">View</span>
+                                <span class="spec-value" id="lotView">--</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Price</span>
+                                <span class="spec-value" id="lotPrice">--</span>
+                            </div>
+                        </div>
+                        <p class="lot-detail-description" id="lotDescription"></p>
+                        <a href="#contact" class="btn btn-primary lot-inquiry-btn" data-lot="">Request Information</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="lot-quick-stats">
+                <div class="quick-stat">
+                    <span class="quick-stat-value" id="availableCount">48</span>
+                    <span class="quick-stat-label">Lots Available</span>
+                </div>
+                <div class="quick-stat">
+                    <span class="quick-stat-value">0.5 - 5</span>
+                    <span class="quick-stat-label">Acre Range</span>
+                </div>
+                <div class="quick-stat">
+                    <span class="quick-stat-value" id="lakeViewCount">18</span>
+                    <span class="quick-stat-label">Lake View Lots</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="section location" id="location">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Prime Location</span>
+                <h2 class="section-title">Connected Yet Secluded</h2>
+                <p class="section-intro">Hidden Lakes offers the perfect balance: a peaceful, natural setting with easy access to everything Iowa City has to offer.</p>
+            </div>
+
+            <div class="location-grid">
+                <div class="location-map-container">
+                    <div class="location-map" id="locationMap">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47584.30755494789!2d-91.58!3d41.64!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87e4416e9f7c9363%3A0x9b4d0d8e4a3fbc7c!2sIowa%20City%2C%20IA!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                            width="100%"
+                            height="100%"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Hidden Lakes Location Map">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="location-info">
+                    <div class="location-card schools">
+                        <h3 class="location-card-title">
+                            <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                            </svg>
+                            West High School District
+                        </h3>
+                        <ul class="location-list">
+                            <li><strong>West High School</strong> - Nationally recognized academics</li>
+                            <li><strong>Northwest Junior High</strong> - Award-winning programs</li>
+                            <li><strong>Weber Elementary</strong> - Top-rated K-5 education</li>
+                        </ul>
+                    </div>
+
+                    <div class="location-card distances">
+                        <h3 class="location-card-title">
+                            <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12,6 12,12 16,14"/>
+                            </svg>
+                            Drive Times
+                        </h3>
+                        <ul class="location-list distances-list">
+                            <li>
+                                <span class="distance-label">Downtown Iowa City</span>
+                                <span class="distance-value">15 min</span>
+                            </li>
+                            <li>
+                                <span class="distance-label">University of Iowa</span>
+                                <span class="distance-value">18 min</span>
+                            </li>
+                            <li>
+                                <span class="distance-label">Coral Ridge Mall</span>
+                                <span class="distance-value">28 min</span>
+                            </li>
+                            <li>
+                                <span class="distance-label">Eastern Iowa Airport</span>
+                                <span class="distance-value">35 min</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="location-card amenities">
+                        <h3 class="location-card-title">
+                            <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            Nearby Amenities
+                        </h3>
+                        <ul class="location-list">
+                            <li>Shopping & Dining</li>
+                            <li>Healthcare Facilities</li>
+                            <li>Parks & Recreation</li>
+                            <li>Cultural Attractions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Explore</span>
+                <h2 class="section-title">Gallery</h2>
+                <p class="section-intro">Experience the natural beauty of Hidden Lakes through our photo and video gallery.</p>
+            </div>
+
+            <div class="gallery-tabs">
+                <button class="gallery-tab active" data-tab="photos">Photos</button>
+                <button class="gallery-tab" data-tab="video">Drone Tour</button>
+                <button class="gallery-tab" data-tab="virtual">Virtual Tour</button>
+            </div>
+
+            <div class="gallery-content">
+                <!-- Photos Tab -->
+                <div class="gallery-panel active" id="photos-panel">
+                    <div class="gallery-grid">
+                        <div class="gallery-item large">
+                            <img src="images/gallery-1.jpg" alt="Aerial view of Hidden Lakes" loading="lazy">
+                            <div class="gallery-item-overlay">
+                                <span>Aerial View</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/gallery-2.jpg" alt="Lake view at sunset" loading="lazy">
+                            <div class="gallery-item-overlay">
+                                <span>Lake at Sunset</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/gallery-3.jpg" alt="Wooded lot" loading="lazy">
+                            <div class="gallery-item-overlay">
+                                <span>Wooded Homesite</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/gallery-4.jpg" alt="Lake front property" loading="lazy">
+                            <div class="gallery-item-overlay">
+                                <span>Lakefront Living</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/gallery-5.jpg" alt="Entrance to Hidden Lakes" loading="lazy">
+                            <div class="gallery-item-overlay">
+                                <span>Community Entrance</span>
+                            </div>
+                        </div>
+                        <div class="gallery-item large">
+                            <img src="images/gallery-6.jpg" alt="Panoramic lake view" loading="lazy">
+                            <div class="gallery-item-overlay">
+                                <span>Panoramic View</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Tab -->
+                <div class="gallery-panel" id="video-panel">
+                    <div class="video-container">
+                        <div class="video-placeholder" id="droneVideo">
+                            <div class="video-placeholder-content">
+                                <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                                <p>Drone Tour Coming Soon</p>
+                                <span>Professional aerial footage of Hidden Lakes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Virtual Tour Tab -->
+                <div class="gallery-panel" id="virtual-panel">
+                    <div class="virtual-tour-container">
+                        <div class="virtual-placeholder">
+                            <div class="virtual-placeholder-content">
+                                <svg class="tour-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+                                    <path d="M2 12h20"/>
+                                </svg>
+                                <p>360° Virtual Tour</p>
+                                <span>Immersive property walkthrough coming soon</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developer Section -->
+    <section class="section developer" id="developer">
+        <div class="container">
+            <div class="developer-content">
+                <div class="developer-text">
+                    <span class="section-label">The Developer</span>
+                    <h2 class="section-title">Klosterman Construction</h2>
+                    <p class="developer-intro">Hidden Lakes is developed by Klosterman Construction, a trusted name in Iowa City area development with a proven track record of delivering quality residential communities.</p>
+                    <p class="developer-description">With deep roots in the Iowa City community and extensive experience in land development, our team is committed to creating a neighborhood that enhances the natural beauty of this exceptional property while providing modern infrastructure and amenities.</p>
+                    <div class="developer-highlights">
+                        <div class="highlight">
+                            <span class="highlight-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                                    <polyline points="22,4 12,14.01 9,11.01"/>
+                                </svg>
+                            </span>
+                            <span class="highlight-text">Experienced Developer</span>
+                        </div>
+                        <div class="highlight">
+                            <span class="highlight-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                                    <polyline points="22,4 12,14.01 9,11.01"/>
+                                </svg>
+                            </span>
+                            <span class="highlight-text">Local Expertise</span>
+                        </div>
+                        <div class="highlight">
+                            <span class="highlight-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                                    <polyline points="22,4 12,14.01 9,11.01"/>
+                                </svg>
+                            </span>
+                            <span class="highlight-text">Quality Commitment</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="developer-image">
+                    <img src="images/developer.jpg" alt="Klosterman Construction" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="cta-banner">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Find Your Perfect Lot?</h2>
+                <p class="cta-text">Schedule a private tour to experience Hidden Lakes in person and discover the homesite of your dreams.</p>
+                <a href="#contact" class="btn btn-primary btn-large">Schedule Your Private Tour</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Get In Touch</span>
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-intro">Interested in learning more about Hidden Lakes? Fill out the form below or reach out directly.</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-form-container">
+                    <form class="contact-form" id="contactForm" action="https://formspree.io/f/placeholder" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="interest">I'm interested in...</label>
+                            <select id="interest" name="interest">
+                                <option value="general">General Information</option>
+                                <option value="tour">Scheduling a Private Tour</option>
+                                <option value="lot">Specific Lot Information</option>
+                                <option value="pricing">Pricing & Availability</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="lotInterest">Lot Number (if applicable)</label>
+                            <input type="text" id="lotInterest" name="lotInterest" placeholder="e.g., Lot 15">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Tell us about your timeline and what you're looking for..."></textarea>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="updates" value="yes">
+                                <span>Keep me updated on new lot releases and community news</span>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                    </form>
+                </div>
+
+                <div class="contact-info-container">
+                    <div class="contact-info-card">
+                        <h3>Contact Information</h3>
+                        <div class="contact-info-item">
+                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                            <a href="mailto:hiddenlakesia@gmail.com">hiddenlakesia@gmail.com</a>
+                        </div>
+                        <div class="contact-info-item">
+                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+                            </svg>
+                            <a href="tel:+13195125612">641-512-5612</a>
+                        </div>
+                        <div class="contact-info-item">
+                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            <span>Southwest Iowa City, Johnson County</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-card social">
+                        <h3>Follow Hidden Lakes</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Facebook">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Instagram">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                    <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <p class="social-handle">@hiddenlakesia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <span class="logo-text">HIDDEN LAKES</span>
+                        <span class="logo-tagline">Premium Estate Living</span>
+                    </div>
+                    <p class="footer-description">52 exclusive estate lots on 80 acres with two scenic lakes in Iowa City's prestigious West High School district.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#community">The Community</a></li>
+                        <li><a href="#lots">Available Lots</a></li>
+                        <li><a href="#location">Location</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p>hiddenlakesia@gmail.com</p>
+                    <p>641-512-5612</p>
+                    <p>Southwest Iowa City, IA</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2026 Hidden Lakes. All rights reserved.</p>
+                <p class="disclaimer">This website is for informational purposes only. Lot prices, availability, and features are subject to change without notice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox for Gallery -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <button class="lightbox-prev" aria-label="Previous">&lsaquo;</button>
+        <button class="lightbox-next" aria-label="Next">&rsaquo;</button>
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightboxImage">
+            <p class="lightbox-caption" id="lightboxCaption"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

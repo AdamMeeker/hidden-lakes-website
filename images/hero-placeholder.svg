@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#E0F4FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B8E0F0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="waterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90A4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2D5A6B;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="landGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A7C59;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2D5A3A;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="1920" height="600" fill="url(#skyGrad)"/>
+
+  <!-- Distant trees -->
+  <g fill="#3A6B4A" opacity="0.6">
+    <path d="M0 580 Q200 520 400 560 Q600 500 800 550 Q1000 480 1200 540 Q1400 490 1600 530 Q1800 500 1920 540 L1920 600 L0 600 Z"/>
+  </g>
+
+  <!-- Lake -->
+  <ellipse cx="960" cy="700" rx="700" ry="180" fill="url(#waterGrad)"/>
+
+  <!-- Lake reflections -->
+  <ellipse cx="960" cy="700" rx="650" ry="150" fill="#5AA0B4" opacity="0.3"/>
+
+  <!-- Foreground land -->
+  <path d="M0 750 Q300 700 500 730 Q700 680 960 700 Q1200 680 1400 720 Q1600 690 1920 740 L1920 1080 L0 1080 Z" fill="url(#landGrad)"/>
+
+  <!-- Trees on sides -->
+  <g fill="#2D5A3A">
+    <!-- Left trees -->
+    <path d="M50 1080 L100 850 L70 880 L110 750 L60 780 L120 650 L30 650 L90 780 L40 750 L80 880 L50 850 L90 1080 Z"/>
+    <path d="M150 1080 L200 900 L170 920 L210 800 L150 800 L190 920 L160 900 L200 1080 Z"/>
+    <path d="M250 1080 L290 880 L260 900 L300 780 L240 780 L280 900 L250 880 L290 1080 Z"/>
+
+    <!-- Right trees -->
+    <path d="M1700 1080 L1750 850 L1720 880 L1760 750 L1710 780 L1770 650 L1680 650 L1740 780 L1690 750 L1730 880 L1700 850 L1740 1080 Z"/>
+    <path d="M1800 1080 L1840 900 L1810 920 L1850 800 L1790 800 L1830 920 L1800 900 L1840 1080 Z"/>
+    <path d="M1870 1080 L1900 920 L1880 940 L1910 850 L1860 850 L1890 940 L1870 920 L1900 1080 Z"/>
+  </g>
+
+  <!-- Clouds -->
+  <g fill="white" opacity="0.8">
+    <ellipse cx="300" cy="150" rx="100" ry="50"/>
+    <ellipse cx="380" cy="140" rx="80" ry="45"/>
+    <ellipse cx="260" cy="160" rx="70" ry="35"/>
+
+    <ellipse cx="1500" cy="200" rx="120" ry="55"/>
+    <ellipse cx="1600" cy="190" rx="90" ry="50"/>
+    <ellipse cx="1450" cy="210" rx="80" ry="40"/>
+  </g>
+
+  <!-- Overlay for text readability -->
+  <rect width="1920" height="1080" fill="rgba(26, 58, 74, 0.3)"/>
+</svg>
