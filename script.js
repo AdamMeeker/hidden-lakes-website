@@ -77,45 +77,45 @@ function initNavigation() {
    LOT MAP - Interactive Site Plan
    ===================================================== */
 
-// Lot data - this would typically come from a database/API
+// Lot data - All 52 lots available (including 2 five-acre lots across the road)
+// NOTE: This data can be synced from a Google Sheet for real-time updates
 const lotData = [
     { id: 1, status: 'available', size: '1.2 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Premium lakefront lot with stunning water views and mature trees.' },
     { id: 2, status: 'available', size: '0.8 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Beautiful lot overlooking the main lake with gentle slope.' },
-    { id: 3, status: 'reserved', size: '1.5 acres', view: 'Wooded', price: 'Reserved', description: 'Secluded wooded lot offering maximum privacy.' },
+    { id: 3, status: 'available', size: '1.5 acres', view: 'Wooded', price: 'Contact for Pricing', description: 'Secluded wooded lot offering maximum privacy.' },
     { id: 4, status: 'available', size: '2.1 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Expansive estate lot with panoramic lake views.' },
     { id: 5, status: 'available', size: '0.9 acres', view: 'Wooded', price: 'Contact for Pricing', description: 'Charming lot with mature hardwoods and privacy.' },
-    { id: 6, status: 'sold', size: '1.1 acres', view: 'Lake View', price: 'Sold', description: 'Lake view lot - no longer available.' },
+    { id: 6, status: 'available', size: '1.1 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Lake view lot with excellent building site.' },
     { id: 7, status: 'available', size: '1.3 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Corner lot with dual lake exposure.' },
     { id: 8, status: 'available', size: '0.7 acres', view: 'Wooded', price: 'Contact for Pricing', description: 'Cozy wooded lot perfect for a private retreat.' },
     { id: 9, status: 'available', size: '1.8 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Large lot with direct lake access potential.' },
-    { id: 10, status: 'reserved', size: '2.0 acres', view: 'Lake View', price: 'Reserved', description: 'Premium estate lot - currently under contract.' },
+    { id: 10, status: 'available', size: '2.0 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Premium estate lot with exceptional views.' },
     { id: 11, status: 'available', size: '1.0 acres', view: 'Wooded', price: 'Contact for Pricing', description: 'Peaceful setting surrounded by natural beauty.' },
     { id: 12, status: 'available', size: '1.4 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Excellent building site with lake views.' },
     { id: 13, status: 'available', size: '0.6 acres', view: 'Wooded', price: 'Contact for Pricing', description: 'Intimate wooded lot with great potential.' },
     { id: 14, status: 'available', size: '1.6 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Sweeping views of both lakes from elevated position.' },
-    { id: 15, status: 'sold', size: '1.2 acres', view: 'Wooded', price: 'Sold', description: 'Wooded lot - no longer available.' },
+    { id: 15, status: 'available', size: '1.2 acres', view: 'Wooded', price: 'Contact for Pricing', description: 'Wooded lot with privacy and natural beauty.' },
     { id: 16, status: 'available', size: '2.3 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'One of the largest lots with incredible lake exposure.' },
     { id: 17, status: 'available', size: '0.9 acres', view: 'Wooded', price: 'Contact for Pricing', description: 'Serene setting with natural landscaping.' },
     { id: 18, status: 'available', size: '1.1 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Popular lake view lot in prime location.' },
-    { id: 19, status: 'reserved', size: '1.7 acres', view: 'Lake View', price: 'Reserved', description: 'Premium lot - currently under contract.' },
+    { id: 19, status: 'available', size: '1.7 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Premium lot with outstanding views.' },
     { id: 20, status: 'available', size: '1.0 acres', view: 'Wooded', price: 'Contact for Pricing', description: 'Well-positioned lot with easy access.' },
-    // Continue for all 52 lots...
     { id: 21, status: 'available', size: '1.3 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Excellent lake views and mature landscaping.' },
     { id: 22, status: 'available', size: '0.8 acres', view: 'Wooded', price: 'Contact for Pricing', description: 'Private wooded setting.' },
     { id: 23, status: 'available', size: '1.5 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Prime lake view homesite.' },
-    { id: 24, status: 'sold', size: '1.2 acres', view: 'Wooded', price: 'Sold', description: 'No longer available.' },
+    { id: 24, status: 'available', size: '1.2 acres', view: 'Wooded', price: 'Contact for Pricing', description: 'Beautiful wooded homesite.' },
     { id: 25, status: 'available', size: '2.0 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Large estate lot with panoramic views.' },
     { id: 26, status: 'available', size: '0.9 acres', view: 'Wooded', price: 'Contact for Pricing', description: 'Tranquil wooded homesite.' },
     { id: 27, status: 'available', size: '1.4 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Beautiful lake exposure.' },
     { id: 28, status: 'available', size: '1.1 acres', view: 'Wooded', price: 'Contact for Pricing', description: 'Peaceful, private setting.' },
     { id: 29, status: 'available', size: '1.6 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Premium waterfront location.' },
-    { id: 30, status: 'reserved', size: '1.3 acres', view: 'Lake View', price: 'Reserved', description: 'Under contract.' },
+    { id: 30, status: 'available', size: '1.3 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Gorgeous lake views.' },
     { id: 31, status: 'available', size: '0.7 acres', view: 'Wooded', price: 'Contact for Pricing', description: 'Charming wooded lot.' },
     { id: 32, status: 'available', size: '1.8 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Exceptional lake views.' },
     { id: 33, status: 'available', size: '1.0 acres', view: 'Wooded', price: 'Contact for Pricing', description: 'Natural beauty surrounds.' },
     { id: 34, status: 'available', size: '1.5 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Popular choice for lake lovers.' },
     { id: 35, status: 'available', size: '2.2 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'One of the largest available lots.' },
-    { id: 36, status: 'sold', size: '1.1 acres', view: 'Wooded', price: 'Sold', description: 'No longer available.' },
+    { id: 36, status: 'available', size: '1.1 acres', view: 'Wooded', price: 'Contact for Pricing', description: 'Peaceful wooded homesite.' },
     { id: 37, status: 'available', size: '1.4 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Great lake exposure.' },
     { id: 38, status: 'available', size: '0.8 acres', view: 'Wooded', price: 'Contact for Pricing', description: 'Cozy woodland setting.' },
     { id: 39, status: 'available', size: '1.7 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Premium lakefront.' },
@@ -130,8 +130,9 @@ const lotData = [
     { id: 48, status: 'available', size: '1.4 acres', view: 'Wooded', price: 'Contact for Pricing', description: 'Generous wooded lot.' },
     { id: 49, status: 'available', size: '1.8 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Outstanding water views.' },
     { id: 50, status: 'available', size: '1.0 acres', view: 'Wooded', price: 'Contact for Pricing', description: 'Natural beauty.' },
-    { id: 51, status: 'available', size: '1.5 acres', view: 'Lake View', price: 'Contact for Pricing', description: 'Prime lakefront.' },
-    { id: 52, status: 'available', size: '1.2 acres', view: 'Wooded', price: 'Contact for Pricing', description: 'Last lot in this section.' }
+    // Lots 51-52: The two 5-acre lots across the road
+    { id: 51, status: 'available', size: '5.0 acres', view: 'Acreage', price: 'Contact for Pricing', description: 'Expansive 5-acre estate lot across the road - perfect for equestrian or hobby farm.' },
+    { id: 52, status: 'available', size: '5.0 acres', view: 'Acreage', price: 'Contact for Pricing', description: 'Expansive 5-acre estate lot across the road - maximum privacy and space.' }
 ];
 
 function initLotMap() {
