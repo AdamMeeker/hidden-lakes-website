@@ -79,15 +79,17 @@ Dand_Rd_Drone-1.jpg.
 
 ---
 
-## C. CONTACT FORM  [?]  (BLOCKED — needs Tiffany)
-Form currently POSTs to `https://formspree.io/f/placeholder` → goes nowhere.
-**Need from Tiffany:** create a free Formspree form at formspree.io using
-`hiddenlakesia@gmail.com` and paste the real form endpoint (looks like
-`https://formspree.io/f/abcdwxyz`). Then:
-- Replace the `action` URL in `index.html` (~line 510).
-- Test a real submission and confirm the email arrives.
-- Interim option if she prefers: switch submit to a `mailto:` link (clunky, opens
-  email client) — only as fallback.
+## C. CONTACT FORM  [~] — CODE DONE, needs Adam's Azure provisioning
+Formspree dropped (paywall). Replaced with **Azure-native** solution:
+- `/api/contact` Azure Function (in repo): STORES to Azure Table Storage first,
+  THEN emails via Azure Communication Services. Lead never lost if email fails.
+- Front-end (`script.js`) posts via fetch with success message + email fallback if
+  the API is unreachable. Honeypot anti-spam field added. Status styled in CSS.
+- Workflow `api_location` set to `api`.
+- **Remaining (Adam):** provision Storage + ACS, set 4 app settings. Full
+  checklist in `SETUP_AZURE_FORM.md`. Then test a live submission.
+- **Also flagged:** duplicate workflow `azure-static-web-apps.yml` should likely be
+  deleted (see SETUP doc).
 
 ---
 

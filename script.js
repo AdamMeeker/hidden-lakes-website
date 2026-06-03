@@ -364,25 +364,79 @@ function navigateLightbox(direction) {
 
 function initContactForm() {
     const form = document.getElementById('contactForm');
+    const statusEl = document.getElementById('formStatus');
+    const RECIPIENT = 'hiddenlakesia@gmail.com';
 
-    form.addEventListener('submit', function(e) {
-        // Form will submit to Formspree (or other service)
-        // Add validation here if needed
+    function showStatus(html, type) {
+        if (!statusEl) { alert(html.replace(/<[^>]+>/g, '')); return; }
+        statusEl.innerHTML = html;
+        statusEl.className = 'form-status ' + (type || '');
+        statusEl.style.display = 'block';
+    }
 
-        const firstName = document.getElementById('firstName').value;
-        const lastName = document.getElementById('lastName').value;
-        const email = document.getElementById('email').value;
+    function showEmailFallback(p) {
+        const subject = encodeURIComponent('Hidden Lakes inquiry — ' + p.firstName + ' ' + p.lastName);
+        const body = encodeURIComponent(
+            'Name: ' + p.firstName + ' ' + p.lastName + '\n' +
+            'Email: ' + p.email + '\n' +
+            'Phone: ' + (p.phone || '') + '\n' +
+            'Interested in: ' + (p.interest || '') + '\n' +
+            'Lot: ' + (p.lotInterest || '') + '\n\n' +
+            (p.message || '')
+        );
+        showStatus(
+            "We couldn't submit the form just now. Please email us directly at " +
+            '<a href="mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body + '">' + RECIPIENT + '</a>' +
+            " and we'll respond right away.",
+            'error'
+        );
+    }
 
-        if (!firstName || !lastName || !email) {
-            e.preventDefault();
-            alert('Please fill in all required fields.');
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const payload = {
+            firstName: document.getElementById('firstName').value.trim(),
+            lastName: document.getElementById('lastName').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            phone: document.getElementById('phone').value.trim(),
+            interest: document.getElementById('interest').value,
+            lotInterest: document.getElementById('lotInterest').value.trim(),
+            message: document.getElementById('message').value.trim(),
+            updates: form.querySelector('input[name="updates"]').checked,
+            _gotcha: (form.querySelector('input[name="_gotcha"]') || {}).value || ''
+        };
+
+        if (!payload.firstName || !payload.lastName || !payload.email) {
+            showStatus('Please fill in your first name, last name, and email.', 'error');
             return;
         }
 
-        // Optional: Show loading state
         const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
         submitBtn.textContent = 'Sending...';
         submitBtn.disabled = true;
+        showStatus('', '');
+        if (statusEl) statusEl.style.display = 'none';
+
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (res.ok) {
+                form.reset();
+                showStatus("Thank you! We've received your message and will be in touch soon.", 'success');
+            } else {
+                showEmailFallback(payload);
+            }
+        } catch (err) {
+            showEmailFallback(payload);
+        } finally {
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }
     });
 
     // Pre-fill lot interest from lot panel inquiry button

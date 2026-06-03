@@ -1,0 +1,13 @@
+{
+  "name": "hidden-lakes-api",
+  "version": "1.0.0",
+  "description": "Azure Static Web Apps API for the Hidden Lakes contact form",
+  "main": "contact/index.js",
+  "scripts": {
+    "start": "func start"
+  },
+  "dependencies": {
+    "@azure/data-tables": "^13.3.0",
+    "@azure/communication-email": "^1.0.0"
+  }
+}
