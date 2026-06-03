@@ -1,0 +1,161 @@
+# Hidden Lakes Website — Project Plan & Progress Tracker
+
+**Purpose:** Living checklist so work can pause/resume across sessions. Update the
+status boxes as items are completed. Repo: `AdamMeeker/hidden-lakes-website`
+(deploys to Azure Static Web Apps on every push to `main` via GitHub Actions).
+
+**Workflow reminder:** Edits are made to files in this folder, then committed &
+pushed via **GitHub Desktop** (the Linux sandbox cannot push — credentials live in
+the macOS keychain). Pushing to `main` auto-triggers the Azure build.
+
+Files: `index.html`, `styles.css`, `script.js`, `images/`.
+
+---
+
+## STATUS LEGEND
+- [ ] = not started
+- [~] = in progress / partially done
+- [x] = done & pushed
+- [?] = blocked, needs info from Tiffany
+
+---
+
+## A. QUICK CONTENT FIXES (low risk, high value)  — DONE 2026-06-03
+
+### A1. Lot count 52 → 50  [x]
+Replace every "52" referring to lot count with "50". Locations found:
+- `index.html` line ~7  (meta description)
+- `index.html` line ~10 (og:description)
+- `index.html` line ~15 (twitter:description)
+- `index.html` line ~66 (hero stat value)
+- `index.html` line ~623 (footer description)
+- `script.js` line ~80 (comment) and the lotData array length
+
+### A2. Lot size range "0.5 to 5 acres" → "0.5 to 1.5 acres"  [x]
+(script.js rebuilt: 50 lots, all 0.5–1.5 ac, 5-ac lots removed, stats now 50/28)
+- `index.html` line ~106 (feature-text: "0.5 to 5 acre homesites")
+- `index.html` line ~257 (quick-stat value "0.5 - 5" → "0.5 - 1.5")
+- `script.js` lotData: cap ALL sizes at 1.5 acres. Currently several lots are
+  2.0/2.1/2.2/2.3/2.5/5.0 acres. Remove the two 5.0-acre lots (ids 51, 52 — the
+  "across the road" acreage lots) entirely so the array totals 50, and rewrite any
+  size > 1.5 to a value within 0.5–1.5. Update the `view: 'Acreage'` entries.
+
+### A3. Drive times under "Premium Location"  [x]
+- Coral Ridge Mall: change **28 min → 15 min** (`index.html` line ~320 area).
+- ADD a new row: **Downtown Cedar Rapids — 28 min**.
+- Also the Community feature card (`index.html` line ~156) says "28 minutes to
+  Coral Ridge Mall" — fix that to 15 minutes too, and consider mentioning Cedar
+  Rapids for consistency.
+
+### A4. Instagram link  [x]
+- Set the Instagram social link `href` to `https://www.instagram.com/hiddenlakesia/`
+  (currently `#`), open in new tab (`target="_blank" rel="noopener"`).
+- `index.html` lines ~591 (contact section) — the `.social-link` for Instagram.
+
+### A5. Facebook link  [x] (commented out, restorable)
+- Tiffany has NO Facebook yet. REMOVE the Facebook `.social-link` for now (lines
+  ~586) OR comment it out so it can be restored later. Don't leave a dead `#` link.
+
+---
+
+## B. GALLERY FIX  [x] — DONE 2026-06-03
+**Root cause:** `index.html` gallery `<img src>` point to `images/gallery-1.jpg` …
+`gallery-6.jpg`, which no longer exist. Actual files are
+`images/Dand_Rd_Drone-1.jpg` … `Dand_Rd_Drone-9.jpg` (9 drone photos, ~6 MB each).
+- Repoint the 6 gallery `<img src>` (lines ~369–402) to the Dand_Rd_Drone images.
+  Optionally add items for all 9.
+- Update `alt` text and the `.gallery-item-overlay span` captions to match.
+- Also the **hero** image (`index.html` line ~46) uses `hero-placeholder.svg` —
+  swap to a strong drone shot (e.g. `Dand_Rd_Drone-1.jpg`).
+- **Performance note:** these JPGs are ~6 MB each (~57 MB total). Strongly
+  recommend resizing/compressing to ~1600px / <400 KB before relying on them, or
+  the page will load very slowly on mobile. (Sandbox has ImageMagick/`sips` route
+  via the user's Mac; can batch-convert.) Track as B-perf.
+
+### B-perf. Compress gallery images  [x]
+Done: 9 drone JPGs resized to 1920px (~600KB each, was ~6MB). Originals moved to
+`images/originals/` and gitignored (kept locally, not deployed). Hero now uses
+Dand_Rd_Drone-1.jpg.
+
+---
+
+## C. CONTACT FORM  [?]  (BLOCKED — needs Tiffany)
+Form currently POSTs to `https://formspree.io/f/placeholder` → goes nowhere.
+**Need from Tiffany:** create a free Formspree form at formspree.io using
+`hiddenlakesia@gmail.com` and paste the real form endpoint (looks like
+`https://formspree.io/f/abcdwxyz`). Then:
+- Replace the `action` URL in `index.html` (~line 510).
+- Test a real submission and confirm the email arrives.
+- Interim option if she prefers: switch submit to a `mailto:` link (clunky, opens
+  email client) — only as fallback.
+
+---
+
+## D. "SCHEDULE A PRIVATE TOUR"  [?]  (NEEDS CLARIFICATION)
+Requirement came in incomplete: *"Schedule a private tour, needs to also …"*.
+The "Schedule Tour" / "Schedule Private Tour" buttons currently just jump to the
+contact form (`#contact`). Ask Tiffany what else it should do, e.g.:
+- Link to a scheduling tool (Calendly, etc.)?
+- Pre-fill the contact form's "interest" = "Scheduling a Private Tour"?
+- Open a different form / phone call CTA?
+
+---
+
+## E. INTERACTIVE LOT MAP  [ ]  (BIG FEATURE — phased)
+**Vision (Tiffany):** Hover any lot on the site plan → popup showing lot size &
+price. Click a lot → go to drone/photos/footage of that specific parcel.
+
+Current state: `script.js` `initLotMap()` is a stub — clicking the site plan opens
+a *random* lot; filters do nothing; no per-lot hover regions exist.
+
+**Phase E1 — Map the lots geometrically.**
+- Need lot boundary coordinates overlaid on `images/site-plan.jpg`. Build an SVG
+  overlay (`#lotOverlay`, already in the HTML at line ~210, viewBox 0 0 1200 800)
+  with one `<polygon>`/`<rect>` per lot, each tagged `data-lot-id`.
+- Getting accurate polygons requires tracing the site plan. Options: (a) Tiffany
+  provides a marked-up plan or coordinates; (b) approximate by hand from the image;
+  (c) use a simple numbered-pin overlay instead of exact polygons as a v1.
+
+**Phase E2 — Hover popups.**
+- On `mouseenter` of a lot shape, show a tooltip with size + price from `lotData`.
+- Color shapes by status (available/reserved/sold) using existing legend colors.
+- Wire up the size/view filters to actually highlight/dim matching lots.
+
+**Phase E3 — Per-lot media pages.**
+- Click a lot → open that parcel's drone/photo/video. Requires per-lot media.
+  **Need from Tiffany:** which drone images/footage map to which lot numbers.
+  Until then, link clicks to a shared gallery or a "media coming soon" modal.
+
+**Data prep:** extend `lotData` objects with `media: [...]` (image/video paths)
+and real `price` once available.
+
+---
+
+## F. NICE-TO-HAVE / FOLLOW-UPS
+- [ ] Custom domain (e.g. hiddenlakesia.com) on Azure — free to attach if owned.
+- [ ] Replace developer.jpg (currently a 1.8 KB placeholder) with a real photo.
+- [ ] Replace site-plan.jpg if a higher-res plat is available.
+- [ ] Confirm correct Google Map embed location (currently generic Iowa City).
+- [ ] Install Chrome + extension so the assistant can watch deploys / verify the
+      live site end-to-end (Safari is read-only to automation).
+
+---
+
+## OPEN QUESTIONS FOR TIFFANY
+1. Formspree endpoint for the contact form? (Item C)
+2. What should "Schedule a Private Tour" do beyond jumping to the form? (Item D)
+3. Which drone photos/videos correspond to which lot numbers? (Item E3)
+4. Real lot prices, or keep "Contact for Pricing"? (Items A2/E)
+5. Exact lot boundaries for the interactive map, or OK to approximate v1? (Item E1)
+
+---
+
+## CHANGELOG
+- 2026-06-01: Fixed phone tel: link; added SEO/social meta tags + favicon. (pushed)
+- 2026-06-01: Added build marker to verify Azure deploy pipeline. (pushed)
+- 2026-06-03: Section A complete (50 lots, 0.5-1.5 ac, drive times incl. Cedar
+  Rapids 28min, Instagram link live, Facebook removed). (pushed)
+- 2026-06-03: Section B complete (gallery repointed to 9 drone photos, compressed
+  ~6MB->~600KB, originals gitignored, hero image swapped). (pushed)
+- (next) Blocked items C (Formspree endpoint) & D (tour button) need Tiffany;
+  then Section E interactive map.

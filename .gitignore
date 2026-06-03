@@ -1,0 +1,5 @@
+
+# Full-res originals kept locally, not deployed
+images/originals/
+.DS_Store
+images/.DS_Store
