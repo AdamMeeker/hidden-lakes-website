@@ -1686,3 +1686,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 .developer-link svg { width: 18px; height: 18px; }
 .developer-link:hover { background: var(--gold); color: var(--primary); }
+
+/* Inline content links (e.g. school links) */
+.feature-text a,
+.location-list a {
+    color: var(--gold-dark);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    font-weight: 600;
+}
+.feature-text a:hover,
+.location-list a:hover {
+    color: var(--primary);
+}
