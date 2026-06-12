@@ -156,6 +156,11 @@ function initLotMap() {
     document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && panel.classList.contains('active')) closeLotPanel(); });
 }
 
+// Touch devices have no hover: a tap fires hover+click together. So on touch we
+// show a tap-to-preview card (with a "View full details" button) instead of
+// jumping straight into the detail panel.
+const SUPPORTS_HOVER = !(window.matchMedia && window.matchMedia('(hover: none)').matches);
+
 let lotTooltip = null;
 function ensureTooltip(){
     if (lotTooltip) return lotTooltip;
@@ -163,6 +168,17 @@ function ensureTooltip(){
     lotTooltip.className = 'lot-tooltip';
     (document.querySelector('.lot-map-wrapper') || document.body).appendChild(lotTooltip);
     return lotTooltip;
+}
+
+function tooltipHTML(lot, withButton){
+    return '<div class="lt-head"><span class="lt-num">Lot ' + lot.id + '</span>' +
+        '<span class="lt-status ' + lot.status + '">' + statusText(lot.status) + '</span></div>' +
+        '<div class="lt-row"><span>Size</span><b>' + lot.acres.toFixed(2) + ' ac &middot; ' + lot.sf.toLocaleString() + ' sf</b></div>' +
+        (lot.features ? '<div class="lt-row"><span>Amenities</span><b>' + lot.features + '</b></div>' : '') +
+        '<div class="lt-row"><span>Price</span><b>' + lot.price + '</b></div>' +
+        (withButton
+            ? '<button type="button" class="lt-btn" data-lot="' + lot.id + '">View full details</button>'
+            : '<div class="lt-foot">Click for full details</div>');
 }
 
 function renderLotOverlay(){
@@ -178,23 +194,34 @@ function renderLotOverlay(){
         p.setAttribute('points', lot.poly.map(function(pt){ return (pt[0]*W).toFixed(1)+','+(pt[1]*H).toFixed(1); }).join(' '));
         p.setAttribute('class', 'lot ' + lot.status);
         p.setAttribute('data-id', lot.id);
-        p.addEventListener('mouseenter', function(e){ showTooltip(e, lot); });
-        p.addEventListener('mousemove', moveTooltip);
-        p.addEventListener('mouseleave', hideTooltip);
-        p.addEventListener('click', function(e){ e.stopPropagation(); showLotInfo(lot.id); });
+        if (SUPPORTS_HOVER) {
+            p.addEventListener('mouseenter', function(e){ showTooltip(e, lot); });
+            p.addEventListener('mousemove', moveTooltip);
+            p.addEventListener('mouseleave', hideTooltip);
+            p.addEventListener('click', function(e){ e.stopPropagation(); showLotInfo(lot.id); });
+        } else {
+            p.addEventListener('click', function(e){ e.stopPropagation(); showLotCard(lot, p); });
+        }
         svg.appendChild(p);
     });
+
+    // Dismiss the touch preview card when tapping elsewhere
+    if (!SUPPORTS_HOVER && !renderLotOverlay._dismissBound) {
+        document.addEventListener('click', function(e){
+            if (lotTooltip && lotTooltip.style.display === 'block' &&
+                !lotTooltip.contains(e.target) && !(e.target.closest && e.target.closest('.lot'))) {
+                hideTooltip();
+            }
+        });
+        renderLotOverlay._dismissBound = true;
+    }
 }
 
+// Desktop: cursor-following tooltip
 function showTooltip(e, lot){
     const t = ensureTooltip();
-    t.innerHTML =
-        '<div class="lt-head"><span class="lt-num">Lot ' + lot.id + '</span>' +
-        '<span class="lt-status ' + lot.status + '">' + statusText(lot.status) + '</span></div>' +
-        '<div class="lt-row"><span>Size</span><b>' + lot.acres.toFixed(2) + ' ac &middot; ' + lot.sf.toLocaleString() + ' sf</b></div>' +
-        (lot.features ? '<div class="lt-row"><span>Amenities</span><b>' + lot.features + '</b></div>' : '') +
-        '<div class="lt-row"><span>Price</span><b>' + lot.price + '</b></div>' +
-        '<div class="lt-foot">Click for full details</div>';
+    t.className = 'lot-tooltip';
+    t.innerHTML = tooltipHTML(lot, false);
     t.style.display = 'block';
     moveTooltip(e);
 }
@@ -210,6 +237,28 @@ function moveTooltip(e){
     lotTooltip.style.left = Math.max(4, x) + 'px';
     lotTooltip.style.top = Math.max(4, y) + 'px';
 }
+
+// Touch: tap shows an anchored card with a button to open the full panel
+function showLotCard(lot, polyEl){
+    const t = ensureTooltip();
+    t.className = 'lot-tooltip touch';
+    t.innerHTML = tooltipHTML(lot, true);
+    t.style.display = 'block';
+    const wrap = document.querySelector('.lot-map-wrapper');
+    const wr = wrap.getBoundingClientRect();
+    const lr = polyEl.getBoundingClientRect();
+    const tw = t.offsetWidth, th = t.offsetHeight;
+    let x = (lr.left - wr.left) + (lr.width / 2) - (tw / 2);
+    let y = (lr.top - wr.top) - th - 10;            // prefer above the lot
+    if (y < 4) y = (lr.bottom - wr.top) + 10;        // not enough room → below
+    x = Math.max(4, Math.min(x, wr.width - tw - 4));
+    y = Math.max(4, Math.min(y, wr.height - th - 4));
+    t.style.left = x + 'px';
+    t.style.top = y + 'px';
+    const btn = t.querySelector('.lt-btn');
+    if (btn) btn.addEventListener('click', function(e){ e.stopPropagation(); hideTooltip(); showLotInfo(lot.id); });
+}
+
 function hideTooltip(){ if (lotTooltip) lotTooltip.style.display = 'none'; }
 
 function showLotInfo(lotId) {

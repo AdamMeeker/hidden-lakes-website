@@ -1651,3 +1651,21 @@ h1, h2, h3, h4, h5, h6 {
     height: auto;
     margin-bottom: 10px;
 }
+
+/* Touch (mobile) lot preview card */
+.lot-tooltip.touch { pointer-events: auto; }
+.lot-tooltip .lt-btn {
+    display: block;
+    width: 100%;
+    margin-top: 9px;
+    padding: 9px 12px;
+    border: none;
+    border-radius: 7px;
+    background: var(--gold);
+    color: #1a2024;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.lot-tooltip .lt-btn:active { filter: brightness(0.95); }
