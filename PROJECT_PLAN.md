@@ -103,33 +103,39 @@ contact form (`#contact`). Ask Tiffany what else it should do, e.g.:
 
 ---
 
-## E. INTERACTIVE LOT MAP  [ ]  (BIG FEATURE — phased)
+## E. INTERACTIVE LOT MAP  [~] HOVER MAP LIVE; click-to-media still pending
 **Vision (Tiffany):** Hover any lot on the site plan → popup showing lot size &
 price. Click a lot → go to drone/photos/footage of that specific parcel.
 
 Current state: `script.js` `initLotMap()` is a stub — clicking the site plan opens
 a *random* lot; filters do nothing; no per-lot hover regions exist.
 
-**Phase E1 — Map the lots geometrically.**
-- Need lot boundary coordinates overlaid on `images/site-plan.jpg`. Build an SVG
-  overlay (`#lotOverlay`, already in the HTML at line ~210, viewBox 0 0 1200 800)
-  with one `<polygon>`/`<rect>` per lot, each tagged `data-lot-id`.
-- Getting accurate polygons requires tracing the site plan. Options: (a) Tiffany
-  provides a marked-up plan or coordinates; (b) approximate by hand from the image;
-  (c) use a simple numbered-pin overlay instead of exact polygons as a v1.
+**Phase E1 — Map the lots geometrically.  [~] IN PROGRESS**
+- DECISION (2026-06-12): keep current `images/site-plan.jpg` as the visible map;
+  overlay hover regions. Auto edge-detection rejected (unreliable on busy plat/
+  faint aerial). Tracing chosen. Lot data: Tiffany already has it, will share.
+- Built `lot-tracer.html` (repo root, gitignored, run locally): loads
+  site-plan.jpg (2000x1333), click corners → Enter to close → exports
+  `lot-polygons.json` with NORMALIZED 0..1 coords (so overlay scales responsively).
+  Has zoom, re-trace, import/resume, localStorage autosave.
+- NEXT: Tiffany traces all 50 lots in the tool, exports `lot-polygons.json`, sends
+  it back + her lot data. Then build the SVG/canvas overlay from that JSON.
+- Reference plat: `images/Plat layout for interactive map.pdf` (clear lot numbers).
 
-**Phase E2 — Hover popups.**
-- On `mouseenter` of a lot shape, show a tooltip with size + price from `lotData`.
-- Color shapes by status (available/reserved/sold) using existing legend colors.
-- Wire up the size/view filters to actually highlight/dim matching lots.
+**Phase E2 — Hover popups.  [x] DONE 2026-06-12**
+- 50 polygons traced via lot-tracer, exported to `images/lot-polygons.json`,
+  embedded into `script.js` lotData (with full Exhibit A data: acres, sf, dims,
+  road, type, amenities, price). Verified polygon alignment against the image.
+- SVG overlay renders per-lot polygons; hover shows tooltip with For-Sale status,
+  size, amenities, price. Click opens detail panel. Size/View filters dim
+  non-matching lots. Available lots have a faint always-on outline for
+  discoverability. All 50 currently `status:'available'`.
 
-**Phase E3 — Per-lot media pages.**
-- Click a lot → open that parcel's drone/photo/video. Requires per-lot media.
-  **Need from Tiffany:** which drone images/footage map to which lot numbers.
-  Until then, link clicks to a shared gallery or a "media coming soon" modal.
-
-**Data prep:** extend `lotData` objects with `media: [...]` (image/video paths)
-and real `price` once available.
+**Phase E3 — Per-lot media pages.  [ ] PENDING (needs Tiffany)**
+- Click a lot → open that parcel's drone/photo/video. **Need from Tiffany:** which
+  drone images/footage map to which lot numbers. Then add `media:[...]` to lotData
+  and open a gallery/modal on click instead of (or alongside) the detail panel.
+- Also: tell me when any lots become reserved/sold (change `status`).
 
 ---
 

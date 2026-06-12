@@ -3,3 +3,11 @@
 images/originals/
 .DS_Store
 images/.DS_Store
+
+# Local dev tool, not for deploy
+lot-tracer.html
+
+# temp preview
+_logocheck.png
+
+_mapcheck.jpg

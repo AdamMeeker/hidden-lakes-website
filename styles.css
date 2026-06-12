@@ -1590,3 +1590,64 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     text-decoration: underline;
 }
+
+/* ===== Interactive lot map enhancements ===== */
+/* Make available lots gently visible so users know to hover */
+.lot-overlay .lot.available {
+    fill: rgba(40, 167, 69, 0.05);
+    stroke: rgba(40, 167, 69, 0.45);
+    stroke-width: 1.5;
+}
+.lot-overlay .lot.available:hover {
+    fill: rgba(40, 167, 69, 0.32);
+    stroke: var(--lot-available);
+    stroke-width: 2.5;
+}
+.lot-overlay .lot.dimmed { opacity: 0.12; }
+
+/* Hover tooltip */
+.lot-tooltip {
+    position: absolute;
+    z-index: 60;
+    min-width: 188px;
+    max-width: 250px;
+    background: rgba(26, 58, 74, 0.97);
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 13px;
+    line-height: 1.35;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+    pointer-events: none;
+    display: none;
+}
+.lot-tooltip .lt-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; margin-bottom: 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 6px;
+}
+.lot-tooltip .lt-num { font-weight: 700; font-size: 14px; letter-spacing: .02em; }
+.lot-tooltip .lt-status {
+    font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 20px;
+    background: #cdeccb; color: #0c5a1f; text-transform: uppercase; letter-spacing: .03em;
+}
+.lot-tooltip .lt-status.reserved { background: #ffe9a8; color: #6a5000; }
+.lot-tooltip .lt-status.sold { background: var(--lot-sold); color: #fff; }
+.lot-tooltip .lt-row { display: flex; justify-content: space-between; gap: 12px; margin: 3px 0; }
+.lot-tooltip .lt-row span { color: #aac3d0; flex-shrink: 0; }
+.lot-tooltip .lt-row b { font-weight: 600; text-align: right; }
+.lot-tooltip .lt-foot { margin-top: 7px; font-size: 11px; text-align: center; color: #c9a962; }
+
+/* ===== Logo ===== */
+.hero-logo {
+    display: block;
+    width: clamp(260px, 44vw, 540px);
+    height: auto;
+    margin: 0.25rem auto 0;
+}
+.footer-logo-img {
+    display: block;
+    width: 168px;
+    height: auto;
+    margin-bottom: 10px;
+}
