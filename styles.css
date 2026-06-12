@@ -1699,3 +1699,11 @@ h1, h2, h3, h4, h5, h6 {
 .location-list a:hover {
     color: var(--primary);
 }
+
+/* Filter highlight: matching lots pop, non-matching fade */
+.lot-overlay .lot.match {
+    fill: rgba(201, 169, 98, 0.32);
+    stroke: var(--gold);
+    stroke-width: 2.5;
+}
+.lot-overlay .lot.dimmed { opacity: 0.08; }
