@@ -1669,3 +1669,20 @@ h1, h2, h3, h4, h5, h6 {
     cursor: pointer;
 }
 .lot-tooltip .lt-btn:active { filter: brightness(0.95); }
+
+/* Developer website link */
+.developer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: var(--spacing-lg);
+    padding: 10px 20px;
+    border: 1.5px solid var(--gold);
+    border-radius: var(--radius-sm);
+    color: var(--gold-dark);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: background var(--transition-fast), color var(--transition-fast);
+}
+.developer-link svg { width: 18px; height: 18px; }
+.developer-link:hover { background: var(--gold); color: var(--primary); }
