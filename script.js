@@ -181,9 +181,11 @@ function tooltipHTML(lot, withButton){
             : '<div class="lt-foot">Click for full details</div>');
 }
 
+const MAP_REMAP_PENDING = true; // new map image swapped in; hover zones hidden until lots are re-traced
 function renderLotOverlay(){
     const svg = document.getElementById('lotOverlay');
     if (!svg) return;
+    if (MAP_REMAP_PENDING) { svg.innerHTML=''; return; }
     const vb = (svg.getAttribute('viewBox') || '0 0 1200 800').split(/\s+/).map(Number);
     const W = vb[2] || 1200, H = vb[3] || 800;
     const NS = 'http://www.w3.org/2000/svg';
