@@ -634,7 +634,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .lot-map {
     position: relative;
-    aspect-ratio: 2400 / 1372;
+    aspect-ratio: 2400 / 1221;
     background: var(--light-gray);
 }
 
