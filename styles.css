@@ -25,6 +25,7 @@
     /* Lot Status Colors */
     --lot-available: #28a745;
     --lot-reserved: #ffc107;
+    --lot-contract: #fd7e14;
     --lot-sold: #dc3545;
     --lot-lake: #4a90a4;
 
@@ -606,6 +607,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .legend-color.available { background: var(--lot-available); }
 .legend-color.reserved { background: var(--lot-reserved); }
+.legend-color.under-contract { background: var(--lot-contract); }
 .legend-color.sold { background: var(--lot-sold); }
 .legend-color.lake { background: var(--lot-lake); }
 
@@ -744,6 +746,10 @@ h1, h2, h3, h4, h5, h6 {
 .lot-detail-status.reserved {
     background: var(--lot-reserved);
     color: var(--primary);
+}
+
+.lot-detail-status.under-contract {
+    background: var(--lot-contract);
 }
 
 .lot-detail-status.sold {
@@ -1603,6 +1609,31 @@ h1, h2, h3, h4, h5, h6 {
     stroke: var(--lot-available);
     stroke-width: 2.5;
 }
+.lot-overlay .lot.reserved {
+    fill: rgba(255, 193, 7, 0.35);
+    stroke: rgba(204, 154, 0, 0.8);
+    stroke-width: 1.5;
+}
+.lot-overlay .lot.reserved:hover {
+    fill: rgba(255, 193, 7, 0.5);
+    stroke: var(--lot-reserved);
+    stroke-width: 2.5;
+}
+.lot-overlay .lot.under-contract {
+    fill: rgba(253, 126, 20, 0.35);
+    stroke: rgba(253, 126, 20, 0.85);
+    stroke-width: 1.5;
+}
+.lot-overlay .lot.under-contract:hover {
+    fill: rgba(253, 126, 20, 0.5);
+    stroke: var(--lot-contract);
+    stroke-width: 2.5;
+}
+.lot-overlay .lot.sold {
+    fill: rgba(220, 53, 69, 0.35);
+    stroke: rgba(220, 53, 69, 0.85);
+    stroke-width: 1.5;
+}
 .lot-overlay .lot.dimmed { opacity: 0.12; }
 
 /* Hover tooltip */
@@ -1632,6 +1663,7 @@ h1, h2, h3, h4, h5, h6 {
     background: #cdeccb; color: #0c5a1f; text-transform: uppercase; letter-spacing: .03em;
 }
 .lot-tooltip .lt-status.reserved { background: #ffe9a8; color: #6a5000; }
+.lot-tooltip .lt-status.under-contract { background: #ffd8b5; color: #7a3a00; }
 .lot-tooltip .lt-status.sold { background: var(--lot-sold); color: #fff; }
 .lot-tooltip .lt-row { display: flex; justify-content: space-between; gap: 12px; margin: 3px 0; }
 .lot-tooltip .lt-row span { color: #aac3d0; flex-shrink: 0; }
