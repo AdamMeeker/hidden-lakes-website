@@ -134,6 +134,14 @@ const lotData = [
   {"id": 50, "status": "available", "acres": 1.17, "sf": 50996, "dim": "135 x 375", "road": "Lakeview Avenue", "type": "Walkout", "features": "Deluxe Lot, Dual Lake & Wood View", "price": "$340,000", "poly": [[0.34708, 0.64701], [0.36708, 0.75594], [0.49292, 0.6249], [0.47292, 0.55201]]}
 ];
 
+// Outlots (common areas) shown on the map. Optional "photos" work the same as on lots.
+const outlotData = [
+  {"id": "E", "name": "Outlot E", "acres": 0.43, "sf": 18912, "note": "Common area at the community entrance.",
+   "photos": [{"src": "images/photos/entrance.jpg", "caption": "Entrance"}],
+   "poly": [[0.8975, 0.2097], [0.9292, 0.2310], [0.9563, 0.2383], [0.9621, 0.2424], [0.9646, 0.2998], [0.8948, 0.2998]],
+   "marker": [0.9490, 0.2640], "markerScale": 0.75}
+];
+
 
 function lotView(l){ const f=(l.features||'').toLowerCase(); if(f.indexOf('lake')>-1) return 'Lake View'; if(f.indexOf('wood')>-1) return 'Wooded'; return 'Standard'; }
 function statusLabel(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
@@ -150,7 +158,7 @@ function initLotMap() {
 
     if (panelClose) panelClose.addEventListener('click', closeLotPanel);
     document.addEventListener('click', function(e){
-        if (panel.classList.contains('active') && !panel.contains(e.target) && !e.target.closest('.lot')) closeLotPanel();
+        if (panel.classList.contains('active') && !panel.contains(e.target) && !e.target.closest('.lot, .outlot')) closeLotPanel();
     });
     if (sizeFilter) sizeFilter.addEventListener('change', filterLots);
     if (viewFilter) viewFilter.addEventListener('change', filterLots);
@@ -209,15 +217,40 @@ function renderLotOverlay(){
         svg.appendChild(p);
     });
 
+    // Outlot (common area) shapes
+    outlotData.forEach(function(o){
+        const p = document.createElementNS(NS, 'polygon');
+        p.setAttribute('points', o.poly.map(function(pt){ return (pt[0]*W).toFixed(1)+','+(pt[1]*H).toFixed(1); }).join(' '));
+        p.setAttribute('class', 'outlot');
+        if (SUPPORTS_HOVER) {
+            p.addEventListener('mouseenter', function(e){ const t = ensureTooltip(); t.className = 'lot-tooltip'; t.innerHTML = outlotTooltipHTML(o, false); t.style.display = 'block'; moveTooltip(e); });
+            p.addEventListener('mousemove', moveTooltip);
+            p.addEventListener('mouseleave', hideTooltip);
+            p.addEventListener('click', function(e){ e.stopPropagation(); showOutlotInfo(o.id); });
+        } else {
+            p.addEventListener('click', function(e){
+                e.stopPropagation();
+                const t = ensureTooltip(); t.className = 'lot-tooltip touch'; t.innerHTML = outlotTooltipHTML(o, true); t.style.display = 'block';
+                const wrap = document.querySelector('.lot-map-wrapper').getBoundingClientRect(), lr = p.getBoundingClientRect();
+                let x = (lr.left - wrap.left) + lr.width/2 - t.offsetWidth/2, y = (lr.top - wrap.top) - t.offsetHeight - 10;
+                if (y < 4) y = (lr.bottom - wrap.top) + 10;
+                t.style.left = Math.max(4, Math.min(x, wrap.width - t.offsetWidth - 4)) + 'px';
+                t.style.top = Math.max(4, Math.min(y, wrap.height - t.offsetHeight - 4)) + 'px';
+                const b = t.querySelector('.lt-btn'); if (b) b.addEventListener('click', function(ev){ ev.stopPropagation(); hideTooltip(); showOutlotInfo(o.id); });
+            });
+        }
+        svg.appendChild(p);
+    });
+
     // Camera markers on lots that have photos
-    lotData.forEach(function(lot){
+    lotData.concat(outlotData).forEach(function(lot){
         if (!lot.photos || !lot.photos.length || !lot.poly) return;
         let cx = 0, cy = 0;
-        lot.poly.forEach(function(pt){ cx += pt[0]; cy += pt[1]; });
-        cx = cx / lot.poly.length * W; cy = cy / lot.poly.length * H;
+        if (lot.marker) { cx = lot.marker[0] * W; cy = lot.marker[1] * H - 46; }
+        else { lot.poly.forEach(function(pt){ cx += pt[0]; cy += pt[1]; }); cx = cx / lot.poly.length * W; cy = cy / lot.poly.length * H; }
         const g = document.createElementNS(NS, 'g');
         g.setAttribute('class', 'lot-photo-marker');
-        g.setAttribute('transform', 'translate(' + cx.toFixed(1) + ',' + (cy + 46).toFixed(1) + ')');
+        g.setAttribute('transform', 'translate(' + cx.toFixed(1) + ',' + (cy + 46).toFixed(1) + ')' + (lot.markerScale ? ' scale(' + lot.markerScale + ')' : ''));
         g.innerHTML = '<circle r="22"></circle>' +
             '<path d="M-11,-5 h5 l3,-4 h6 l3,4 h5 a2,2 0 0 1 2,2 v12 a2,2 0 0 1 -2,2 h-22 a2,2 0 0 1 -2,-2 v-12 a2,2 0 0 1 2,-2 z"></path>' +
             '<circle class="lens" cx="0" cy="2" r="4.5"></circle>';
@@ -228,7 +261,7 @@ function renderLotOverlay(){
     if (!SUPPORTS_HOVER && !renderLotOverlay._dismissBound) {
         document.addEventListener('click', function(e){
             if (lotTooltip && lotTooltip.style.display === 'block' &&
-                !lotTooltip.contains(e.target) && !(e.target.closest && e.target.closest('.lot'))) {
+                !lotTooltip.contains(e.target) && !(e.target.closest && e.target.closest('.lot, .outlot'))) {
                 hideTooltip();
             }
         });
@@ -280,11 +313,53 @@ function showLotCard(lot, polyEl){
 
 function hideTooltip(){ if (lotTooltip) lotTooltip.style.display = 'none'; }
 
+function outlotTooltipHTML(o, withButton){
+    return '<div class="lt-head"><span class="lt-num">' + o.name + '</span><span class="lt-status outlot">Common Area</span></div>' +
+        '<div class="lt-row"><span>Size</span><b>' + o.acres.toFixed(2) + ' ac &middot; ' + o.sf.toLocaleString() + ' sf</b></div>' +
+        (o.photos && o.photos.length ? '<div class="lt-photos">' + o.photos.length + (o.photos.length > 1 ? ' photos' : ' photo') + '</div>' : '') +
+        (withButton ? '<button type="button" class="lt-btn">View photos</button>' : '<div class="lt-foot">Click to view</div>');
+}
+
+function renderPanelPhotos(photos){
+    const photoBox = document.getElementById('lotPhotos');
+    if (!photoBox) return;
+    photoBox.innerHTML = '';
+    if (!photos || !photos.length) { photoBox.hidden = true; return; }
+    photos.forEach(function(ph){
+        const fig = document.createElement('figure');
+        fig.className = 'lot-photo';
+        const im = document.createElement('img');
+        im.src = ph.src; im.alt = ph.caption; im.loading = 'lazy';
+        const cap = document.createElement('figcaption');
+        cap.textContent = ph.caption;
+        fig.appendChild(im); fig.appendChild(cap);
+        fig.addEventListener('click', function(){ openLightbox(new URL(ph.src, location.href).href, ph.caption); });
+        photoBox.appendChild(fig);
+    });
+    photoBox.hidden = false;
+}
+
+function setLotOnlyParts(show){
+    document.querySelectorAll('#lotStatus, #lotDetailPanel .lot-detail-specs, #lotDetailPanel .lot-inquiry-btn').forEach(function(el){ el.style.display = show ? '' : 'none'; });
+}
+
+function showOutlotInfo(id){
+    const o = outlotData.find(function(x){ return x.id === id; });
+    if (!o) return;
+    document.querySelector('#lotDetailPanel .lot-detail-title').textContent = o.name;
+    setLotOnlyParts(false);
+    document.getElementById('lotDescription').textContent = o.note + ' ' + o.acres.toFixed(2) + ' acres (' + o.sf.toLocaleString() + ' sf).';
+    renderPanelPhotos(o.photos);
+    document.getElementById('lotDetailPanel').classList.add('active');
+    hideTooltip();
+}
+
 function showLotInfo(lotId) {
     const lot = lotData.find(function(l){ return l.id === lotId; });
     if (!lot) return;
     const panel = document.getElementById('lotDetailPanel');
-    document.getElementById('lotNumber').textContent = lot.id;
+    document.querySelector('#lotDetailPanel .lot-detail-title').innerHTML = 'Lot <span id="lotNumber">' + lot.id + '</span>';
+    setLotOnlyParts(true);
     const st = document.getElementById('lotStatus');
     st.textContent = statusText(lot.status);
     st.className = 'lot-detail-status ' + lot.status;
@@ -297,26 +372,7 @@ function showLotInfo(lotId) {
     if (lot.dim) desc.push('Approx. dimensions ' + lot.dim + '.');
     desc.push(lot.type === 'Daylight' ? 'Daylight lot.' : 'Walk-out (W/O) lot.');
     document.getElementById('lotDescription').textContent = desc.join(' ');
-    const photoBox = document.getElementById('lotPhotos');
-    if (photoBox) {
-        photoBox.innerHTML = '';
-        if (lot.photos && lot.photos.length) {
-            lot.photos.forEach(function(ph){
-                const fig = document.createElement('figure');
-                fig.className = 'lot-photo';
-                const im = document.createElement('img');
-                im.src = ph.src; im.alt = ph.caption; im.loading = 'lazy';
-                const cap = document.createElement('figcaption');
-                cap.textContent = ph.caption;
-                fig.appendChild(im); fig.appendChild(cap);
-                fig.addEventListener('click', function(){ openLightbox(new URL(ph.src, location.href).href, ph.caption); });
-                photoBox.appendChild(fig);
-            });
-            photoBox.hidden = false;
-        } else {
-            photoBox.hidden = true;
-        }
-    }
+    renderPanelPhotos(lot.photos);
     const btn = document.querySelector('.lot-inquiry-btn');
     if (btn) btn.setAttribute('data-lot', lot.id);
     panel.classList.add('active');
