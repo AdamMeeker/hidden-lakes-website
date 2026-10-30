@@ -80,14 +80,15 @@ function initNavigation() {
 // Lot data — from Exhibit A (Hidden Lakes Characteristics by Lot Pricing).
 // Polygon points (normalized 0..1 to images/site-plan.jpg) from the lot-tracer export.
 // Statuses: 'available', 'reserved', 'under-contract', or 'sold'.
+// Optional "photos": [{"src": "images/photos/...", "caption": "..."}] shows a camera icon on the map and photos in the lot panel.
 const lotData = [
-  {"id": 1, "status": "available", "acres": 1.01, "sf": 43977, "dim": "152 x 289", "road": "Hidden Lakes Crossing", "type": "Walkout", "features": "Corner Lot, Lake View", "price": "$265,000", "poly": [[0.46, 0.34152], [0.49375, 0.50614], [0.56125, 0.48812], [0.51, 0.28829]]},
+  {"id": 1, "status": "available", "acres": 1.01, "sf": 43977, "dim": "152 x 289", "road": "Hidden Lakes Crossing", "type": "Walkout", "features": "Corner Lot, Lake View", "price": "$265,000", "photos": [{"src": "images/photos/lot-1-view.jpg", "caption": "View from Lot 1"}], "poly": [[0.46, 0.34152], [0.49375, 0.50614], [0.56125, 0.48812], [0.51, 0.28829]]},
   {"id": 2, "status": "available", "acres": 1.01, "sf": 44085, "dim": "139 x 317", "road": "Hidden Lakes Crossing", "type": "Walkout", "features": "Lake View", "price": "$265,000", "poly": [[0.51, 0.28911], [0.56833, 0.2457], [0.60375, 0.47666], [0.56208, 0.48649]]},
   {"id": 3, "status": "available", "acres": 1.02, "sf": 44568, "dim": "137 x 325", "road": "Hidden Lakes Crossing", "type": "Walkout", "features": "Lake View", "price": "$265,000", "poly": [[0.5675, 0.24161], [0.60375, 0.47666], [0.64208, 0.44636], [0.62667, 0.22195]]},
   {"id": 4, "status": "available", "acres": 1, "sf": 43579, "dim": "145 x 298", "road": "Hidden Lakes Crossing", "type": "Walkout", "features": "Lake View", "price": "$265,000", "poly": [[0.62583, 0.21376], [0.64458, 0.44144], [0.68917, 0.40704], [0.68792, 0.20966]]},
   {"id": 5, "status": "available", "acres": 1.01, "sf": 43877, "dim": "162 x 269", "road": "Hidden Lakes Crossing", "type": "Walkout", "features": "Lake View", "price": "$265,000", "poly": [[0.68792, 0.21212], [0.68833, 0.40541], [0.75125, 0.40704], [0.74958, 0.20966]]},
   {"id": 6, "status": "available", "acres": 1.02, "sf": 42246, "dim": "164 x 269", "road": "Hidden Lakes Crossing", "type": "Walkout", "features": "", "price": "$250,000", "poly": [[0.7475, 0.20803], [0.75167, 0.40786], [0.81083, 0.40541], [0.80875, 0.20557]]},
-  {"id": 7, "status": "reserved", "acres": 1.07, "sf": 46404, "dim": "172 x 269", "road": "Hidden Lakes Crossing", "type": "Walkout", "features": "Corner Lot (HLC & PW)", "price": "$250,000", "poly": [[0.81167, 0.20557], [0.81292, 0.40377], [0.87833, 0.40377], [0.87333, 0.20966]]},
+  {"id": 7, "status": "reserved", "acres": 1.07, "sf": 46404, "dim": "172 x 269", "road": "Hidden Lakes Crossing", "type": "Walkout", "features": "Corner Lot (HLC & PW)", "price": "$250,000", "photos": [{"src": "images/photos/lot-7-spec-house-view-1.jpg", "caption": "Lot 7 Spec House View"}, {"src": "images/photos/lot-7-spec-house-view-2.jpg", "caption": "Lot 7 Spec House View"}], "poly": [[0.81167, 0.20557], [0.81292, 0.40377], [0.87833, 0.40377], [0.87333, 0.20966]]},
   {"id": 8, "status": "available", "acres": 1.22, "sf": 52999, "dim": "158 x 335", "road": "Prairie Way", "type": "Walkout", "features": "Premium Lot, Lake View", "price": "$310,000", "poly": [[0.75125, 0.40541], [0.75375, 0.52007], [0.87542, 0.51597], [0.87708, 0.40377]]},
   {"id": 9, "status": "available", "acres": 1.04, "sf": 45191, "dim": "145 x 314", "road": "Lakeview Avenue", "type": "Walkout", "features": "Corner Lot (LV & PW)", "price": "$250,000", "poly": [[0.825, 0.52416], [0.825, 0.76085], [0.88042, 0.74201], [0.87833, 0.5217]]},
   {"id": 10, "status": "available", "acres": 1.02, "sf": 44272, "dim": "137 x 322", "road": "Lakeview Avenue", "type": "Walkout", "features": "", "price": "$250,000", "poly": [[0.82292, 0.52252], [0.77083, 0.52416], [0.77375, 0.76495], [0.825, 0.75921]]},
@@ -126,7 +127,7 @@ const lotData = [
   {"id": 43, "status": "under-contract", "acres": 1.13, "sf": 49107, "dim": "", "road": "Hidden Lakes Court", "type": "Walkout", "features": "Deluxe Lot, Dual Lake View, Woodland, Cul-de-sac", "price": "$325,000", "poly": [[0.21708, 0.81818], [0.21708, 0.85586], [0.29958, 0.95741], [0.32375, 0.88043], [0.27792, 0.73219]]},
   {"id": 44, "status": "available", "acres": 1.18, "sf": 51545, "dim": "", "road": "Hidden Lakes Court", "type": "Walkout", "features": "Deluxe Lot, Lake View, Cul-de-sac", "price": "$325,000", "poly": [[0.21625, 0.81654], [0.20542, 0.80098], [0.19, 0.79853], [0.18625, 0.61916], [0.26458, 0.62326], [0.27542, 0.72727]]},
   {"id": 45, "status": "available", "acres": 1.07, "sf": 46692, "dim": "", "road": "Hidden Lakes Court", "type": "Walkout", "features": "Premium Lot", "price": "$250,000", "poly": [[0.18917, 0.80098], [0.175, 0.819], [0.14375, 0.80508], [0.125, 0.7715], [0.11583, 0.7199], [0.11458, 0.62654], [0.18625, 0.62326]]},
-  {"id": 46, "status": "available", "acres": 1.02, "sf": 44366, "dim": "", "road": "Hidden Lakes Court", "type": "Walkout", "features": "Premium Lot", "price": "$250,000", "poly": [[0.20333, 0.61671], [0.11458, 0.61671], [0.11792, 0.54545], [0.13208, 0.49468], [0.15875, 0.47093], [0.2, 0.457]]},
+  {"id": 46, "status": "available", "acres": 1.02, "sf": 44366, "dim": "", "road": "Hidden Lakes Court", "type": "Walkout", "features": "Premium Lot", "price": "$250,000", "photos": [{"src": "images/photos/lot-46-view.jpg", "caption": "View from Lot 46"}], "poly": [[0.20333, 0.61671], [0.11458, 0.61671], [0.11792, 0.54545], [0.13208, 0.49468], [0.15875, 0.47093], [0.2, 0.457]]},
   {"id": 47, "status": "available", "acres": 1, "sf": 43662, "dim": "", "road": "Hidden Lakes Court", "type": "Walkout", "features": "Premium Lot, Lake View, Green Space", "price": "$275,000", "poly": [[0.205, 0.61507], [0.26458, 0.61916], [0.27542, 0.57002], [0.27958, 0.457], [0.20208, 0.45536]]},
   {"id": 48, "status": "available", "acres": 1.08, "sf": 47125, "dim": "136 x 348", "road": "Lakeview Avenue", "type": "Walkout", "features": "Premium, Corner Lot (LA & HLC)", "price": "$300,000", "poly": [[0.32208, 0.44636], [0.33083, 0.55201], [0.45667, 0.46683], [0.43542, 0.37756]]},
   {"id": 49, "status": "available", "acres": 1.04, "sf": 45091, "dim": "127 x 355", "road": "Lakeview Avenue", "type": "Walkout", "features": "Premium Lot, Lake View", "price": "$320,000", "poly": [[0.33208, 0.56183], [0.34625, 0.64865], [0.47375, 0.54791], [0.455, 0.46683]]},
@@ -176,6 +177,7 @@ function tooltipHTML(lot, withButton){
         '<div class="lt-row"><span>Size</span><b>' + lot.acres.toFixed(2) + ' ac &middot; ' + lot.sf.toLocaleString() + ' sf</b></div>' +
         (lot.features ? '<div class="lt-row"><span>Amenities</span><b>' + lot.features + '</b></div>' : '') +
         '<div class="lt-row"><span>Price</span><b>' + lot.price + '</b></div>' +
+        (lot.photos && lot.photos.length ? '<div class="lt-photos">' + lot.photos.length + (lot.photos.length > 1 ? ' photos' : ' photo') + ' of this lot</div>' : '') +
         (withButton
             ? '<button type="button" class="lt-btn" data-lot="' + lot.id + '">View full details</button>'
             : '<div class="lt-foot">Click for full details</div>');
@@ -205,6 +207,21 @@ function renderLotOverlay(){
             p.addEventListener('click', function(e){ e.stopPropagation(); showLotCard(lot, p); });
         }
         svg.appendChild(p);
+    });
+
+    // Camera markers on lots that have photos
+    lotData.forEach(function(lot){
+        if (!lot.photos || !lot.photos.length || !lot.poly) return;
+        let cx = 0, cy = 0;
+        lot.poly.forEach(function(pt){ cx += pt[0]; cy += pt[1]; });
+        cx = cx / lot.poly.length * W; cy = cy / lot.poly.length * H;
+        const g = document.createElementNS(NS, 'g');
+        g.setAttribute('class', 'lot-photo-marker');
+        g.setAttribute('transform', 'translate(' + cx.toFixed(1) + ',' + (cy + 46).toFixed(1) + ')');
+        g.innerHTML = '<circle r="22"></circle>' +
+            '<path d="M-11,-5 h5 l3,-4 h6 l3,4 h5 a2,2 0 0 1 2,2 v12 a2,2 0 0 1 -2,2 h-22 a2,2 0 0 1 -2,-2 v-12 a2,2 0 0 1 2,-2 z"></path>' +
+            '<circle class="lens" cx="0" cy="2" r="4.5"></circle>';
+        svg.appendChild(g);
     });
 
     // Dismiss the touch preview card when tapping elsewhere
@@ -280,6 +297,26 @@ function showLotInfo(lotId) {
     if (lot.dim) desc.push('Approx. dimensions ' + lot.dim + '.');
     desc.push(lot.type === 'Daylight' ? 'Daylight lot.' : 'Walk-out (W/O) lot.');
     document.getElementById('lotDescription').textContent = desc.join(' ');
+    const photoBox = document.getElementById('lotPhotos');
+    if (photoBox) {
+        photoBox.innerHTML = '';
+        if (lot.photos && lot.photos.length) {
+            lot.photos.forEach(function(ph){
+                const fig = document.createElement('figure');
+                fig.className = 'lot-photo';
+                const im = document.createElement('img');
+                im.src = ph.src; im.alt = ph.caption; im.loading = 'lazy';
+                const cap = document.createElement('figcaption');
+                cap.textContent = ph.caption;
+                fig.appendChild(im); fig.appendChild(cap);
+                fig.addEventListener('click', function(){ openLightbox(new URL(ph.src, location.href).href, ph.caption); });
+                photoBox.appendChild(fig);
+            });
+            photoBox.hidden = false;
+        } else {
+            photoBox.hidden = true;
+        }
+    }
     const btn = document.querySelector('.lot-inquiry-btn');
     if (btn) btn.setAttribute('data-lot', lot.id);
     panel.classList.add('active');
